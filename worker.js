@@ -4,7 +4,10 @@ const axios = require('axios');
 const OpenAI = require('openai');
 require('dotenv').config();
 
-const redis = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379');
+const redis = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', {
+  maxRetriesPerRequest: null
+});
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || '' });
 
 const tenants = {};

@@ -8,7 +8,10 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
-const redis = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379');
+const redis = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', {
+  maxRetriesPerRequest: null
+});
+
 const sendQueue = new Queue('send-queue', { connection: redis });
 
 const tenants = {};
